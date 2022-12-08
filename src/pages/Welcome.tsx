@@ -6,6 +6,7 @@ import { SafeAreaView, Text, Image, TouchableOpacity, StyleSheet } from 'react-n
 // {'\n'} faz uma quebra de linha
 
 import wateringImg from '../assets/watering.png'
+import { Button } from '../components/Button'
 import colors from '../styles/colors'
 
 export function Welcolme(){
@@ -23,11 +24,8 @@ export function Welcolme(){
                 Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você sempre que precisar.
             </Text>
 
-            <TouchableOpacity style={styles.button} activeOpacity={0.6}>
-                <Text style={styles.buttonNext}>
-                    Ir
-                </Text>
-            </TouchableOpacity>
+            <Button title={'>'}/>
+
         </SafeAreaView>
     )
 }
@@ -54,21 +52,8 @@ const styles = StyleSheet.create({
         color: colors.body_dark,
         lineHeight: 25
     },
-    button: {
-        backgroundColor: colors.green,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 16,
-        marginBottom: 56,
-        height: 56,
-        width: 56
-    },
     image: {
         width: 292,
         height: 292,
-    },
-    buttonNext: {
-        color: colors.white,
-        fontSize: 24
     }
 })
