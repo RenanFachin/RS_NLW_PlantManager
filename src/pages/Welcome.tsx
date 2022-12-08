@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from '../components/Button'
 import { SafeAreaView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 
 // TouchableOpacity é um elemento que faz um efeito de opacidade ao ser pressionado
@@ -6,7 +7,6 @@ import { SafeAreaView, Text, Image, TouchableOpacity, StyleSheet } from 'react-n
 // {'\n'} faz uma quebra de linha
 
 import wateringImg from '../assets/watering.png'
-import { Button } from '../components/Button'
 import colors from '../styles/colors'
 
 export function Welcolme(){
@@ -24,7 +24,7 @@ export function Welcolme(){
                 Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você sempre que precisar.
             </Text>
 
-            <Button title={'>'}/>
+            <Button title={'>'} />
 
         </SafeAreaView>
     )
