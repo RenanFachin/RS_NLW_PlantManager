@@ -19,14 +19,30 @@ import fonts from '../styles/fonts'
 */
 
 export function UserIdentification() {
-    const [isFocused, setIsFocused] = useState(false);
+    /* 
+    os dois primeiros states não precisaram ser tipados por que atribuindo o valor de FALSE, ele já vai automaticamente entender que é um dado booleano.
+    Já o state name precisa receber uma tipagem do tipo string <string>
+    */
+
+    const [isFocused, setIsFocused] = useState(false); // Capturando se o input está focado
+    const [isFilled, setIsFilled] = useState(false); // Capturando se o input está preenchido
+    const [name, setName] = useState<String>() // Capturando o nome do usuário em um state
 
     function handleInputBlur(){
         setIsFocused(false)
+
+        setIsFilled(!!name)
     }
 
     function handleInputFocus(){
         setIsFocused(true)
+    }
+
+    function handleInputChange(value: string){
+        // Transformando o value em true ou False
+        // Caso tenha conteúdo = true
+        setIsFilled(Boolean(value))
+        setName(value)
     }
 
     return (
@@ -43,7 +59,7 @@ export function UserIdentification() {
                         <View style={styles.header}>
                             {/* Esta view foi criada por causa do keyboardAvoidingView */}
                             <Text style={styles.emoji}>
-                                😃
+                                {isFilled ? '😁' : '😃'}
                             </Text>
 
                             <Text style={styles.title}>
@@ -56,13 +72,15 @@ export function UserIdentification() {
                             style={[
                                 styles.input,
                                 // Caso o state isFocused esteja como TRUE
-                                isFocused && {borderColor: colors.green}
+                                (isFocused || isFilled) && {borderColor: colors.green}
                             ]}
                             placeholder="Digite o seu nome"
 
                             // Customizando propriedades com funções
                             onBlur={handleInputBlur}
                             onFocus={handleInputFocus}
+                            // Capturando os valores para atribuir no state name
+                            onChangeText={handleInputChange}
                         />
 
                         <View style={styles.footer}>
