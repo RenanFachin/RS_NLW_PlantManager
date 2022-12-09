@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '../components/Button'
 
 import {
@@ -19,6 +19,16 @@ import fonts from '../styles/fonts'
 */
 
 export function UserIdentification() {
+    const [isFocused, setIsFocused] = useState(false);
+
+    function handleInputBlur(){
+        setIsFocused(false)
+    }
+
+    function handleInputFocus(){
+        setIsFocused(true)
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView 
@@ -42,8 +52,17 @@ export function UserIdentification() {
                         </View>
 
                         <TextInput
-                            style={styles.input}
+                            // É possível passar mais de um estilo, utilizando vetor
+                            style={[
+                                styles.input,
+                                // Caso o state isFocused esteja como TRUE
+                                isFocused && {borderColor: colors.green}
+                            ]}
                             placeholder="Digite o seu nome"
+
+                            // Customizando propriedades com funções
+                            onBlur={handleInputBlur}
+                            onFocus={handleInputFocus}
                         />
 
                         <View style={styles.footer}>
