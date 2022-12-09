@@ -1,6 +1,12 @@
 import React from 'react'
-import { Button } from '../components/Button'
-import { SafeAreaView, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { 
+    SafeAreaView, 
+    Text, 
+    Image, 
+    StyleSheet, 
+    TouchableOpacity, 
+    Dimensions 
+} from 'react-native'
 
 // TouchableOpacity é um elemento que faz um efeito de opacidade ao ser pressionado
 // SafeAreaView é semelhante ao View porém utilizando apenas áreas "seguras" de cada device
@@ -18,13 +24,21 @@ export function Welcolme(){
                 forma fácil
             </Text>
 
-            <Image source={wateringImg} style={styles.image}/>
+            <Image 
+                source={wateringImg} 
+                style={styles.image}
+                resizeMode="contain"
+            />
 
             <Text style={styles.subtitle}>
                 Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você sempre que precisar.
             </Text>
 
-            <Button title={'>'} />
+            <TouchableOpacity style={styles.button} activeOpacity={0.6}>
+            <Text style={styles.buttonText}>
+                >
+            </Text>
+        </TouchableOpacity>
 
         </SafeAreaView>
     )
@@ -35,14 +49,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     title: {
         fontSize: 32,
         fontWeight: 'bold',
         textAlign: 'center',
         color: colors.heading,
-        marginTop: 80,
+        marginTop: 60,
         lineHeight: 38
     },
     subtitle: {
@@ -53,7 +67,19 @@ const styles = StyleSheet.create({
         lineHeight: 25
     },
     image: {
-        width: 292,
-        height: 292,
+        height: Dimensions.get('window').width * 0.7,
+    },
+    button: {
+        backgroundColor: colors.green,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 16,
+        marginBottom: 36,
+        height: 56,
+        width: 56
+    },
+    buttonText: {
+        color: colors.white,
+        fontSize: 24
     }
 })
