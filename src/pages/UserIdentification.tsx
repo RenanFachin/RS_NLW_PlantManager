@@ -8,7 +8,9 @@ import {
     Text,
     TextInput,
     KeyboardAvoidingView,
-    Platform
+    TouchableWithoutFeedback,
+    Platform,
+    Keyboard
 } from 'react-native'
 
 import colors from '../styles/colors'
@@ -19,9 +21,13 @@ import { useNavigation } from '@react-navigation/native'
  KeyboardAvoidingView é para ajudar a ter um melhor resultado com os inputs dentro da aplicação, mantendo o botão de confirmar aparecendo na tela mesmo quando o usuário está com o teclado do celular aberto
 */
 
+/**
+ * TouchableWithoutFeedback e o Keyboard servem parar permitir o usuário fechar o teclado ao clicar fora, em qualquer local da tela. 
+ */
+
 export function UserIdentification() {
     const navigation = useNavigation()
-    
+
     /* 
     os dois primeiros states não precisaram ser tipados por que atribuindo o valor de FALSE, ele já vai automaticamente entender que é um dado booleano.
     Já o state name precisa receber uma tipagem do tipo string <string>
@@ -31,17 +37,17 @@ export function UserIdentification() {
     const [isFilled, setIsFilled] = useState(false); // Capturando se o input está preenchido
     const [name, setName] = useState<String>() // Capturando o nome do usuário em um state
 
-    function handleInputBlur(){
+    function handleInputBlur() {
         setIsFocused(false)
 
         setIsFilled(!!name)
     }
 
-    function handleInputFocus(){
+    function handleInputFocus() {
         setIsFocused(true)
     }
 
-    function handleInputChange(value: string){
+    function handleInputChange(value: string) {
         // Transformando o value em true ou False
         // Caso tenha conteúdo = true
         setIsFilled(Boolean(value))
@@ -49,57 +55,59 @@ export function UserIdentification() {
     }
 
 
-    function handleStart(){
+    function handleStart() {
         navigation.navigate('Confirmation')
     }
 
     return (
         <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView 
+            <KeyboardAvoidingView
                 style={styles.container}
                 // Personalizando o comportamento em diferentes plataformas
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 
-                <View style={styles.content}>
-                    <View style={styles.form}>
+                    <View style={styles.content}>
+                        <View style={styles.form}>
 
-                        <View style={styles.header}>
-                            {/* Esta view foi criada por causa do keyboardAvoidingView */}
-                            <Text style={styles.emoji}>
-                                {isFilled ? '😁' : '😃'}
-                            </Text>
+                            <View style={styles.header}>
+                                {/* Esta view foi criada por causa do keyboardAvoidingView */}
+                                <Text style={styles.emoji}>
+                                    {isFilled ? '😁' : '😃'}
+                                </Text>
 
-                            <Text style={styles.title}>
-                                Como podemos {'\n'} chamar você?
-                            </Text>
-                        </View>
+                                <Text style={styles.title}>
+                                    Como podemos {'\n'} chamar você?
+                                </Text>
+                            </View>
 
-                        <TextInput
-                            // É possível passar mais de um estilo, utilizando vetor
-                            style={[
-                                styles.input,
-                                // Caso o state isFocused esteja como TRUE
-                                (isFocused || isFilled) && {borderColor: colors.green}
-                            ]}
-                            placeholder="Digite o seu nome"
+                            <TextInput
+                                // É possível passar mais de um estilo, utilizando vetor
+                                style={[
+                                    styles.input,
+                                    // Caso o state isFocused esteja como TRUE
+                                    (isFocused || isFilled) && { borderColor: colors.green }
+                                ]}
+                                placeholder="Digite o seu nome"
 
-                            // Customizando propriedades com funções
-                            onBlur={handleInputBlur}
-                            onFocus={handleInputFocus}
-                            // Capturando os valores para atribuir no state name
-                            onChangeText={handleInputChange}
-                        />
-
-                        <View style={styles.footer}>
-                            <Button 
-                                title={'Confirmar'} 
-                                onPress={handleStart}
+                                // Customizando propriedades com funções
+                                onBlur={handleInputBlur}
+                                onFocus={handleInputFocus}
+                                // Capturando os valores para atribuir no state name
+                                onChangeText={handleInputChange}
                             />
+
+                            <View style={styles.footer}>
+                                <Button
+                                    title={'Confirmar'}
+                                    onPress={handleStart}
+                                />
+                            </View>
                         </View>
                     </View>
-                </View>
 
+                </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
