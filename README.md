@@ -27,6 +27,7 @@ Este projeto foi desenvolvido utilizando:
 - [x] React Native
 - [x] Typescript
 - [x] Expo
+  - [x] @expo/vector-icons
 
 ## ✔️ Autores
 
