@@ -27,7 +27,8 @@ Este projeto foi desenvolvido utilizando:
 - [x] React Native
 - [x] Typescript
 - [x] Expo
-  - [x] @expo/vector-icons
+  - [x] [@expo/vector-icons](https://docs.expo.dev/guides/icons/#expovector-icons)
+  - [x] [@expo-google-fonts](https://github.com/expo/google-fonts)
 
 ## ✔️ Autores
 
