@@ -1,8 +1,6 @@
 import React from 'react'
 import { Loading } from './src/components/Loading'
-import { Welcolme } from './src/pages/Welcome'
-import { UserIdentification } from './src/pages/UserIdentification'
-import { Confirmation } from './src/pages/Confirmation'
+import { Routes } from './src/routes'
 
 import {
   useFonts,
@@ -23,7 +21,7 @@ export default function App(){
   
   return(
     <>
-      { fontsLoaded ? <Confirmation /> : <Loading />}
+      { fontsLoaded ? <Routes /> : <Loading />}
     </>
   )
 }
