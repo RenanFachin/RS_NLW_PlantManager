@@ -5,7 +5,8 @@ import {
     Image, 
     StyleSheet, 
     TouchableOpacity, 
-    Dimensions 
+    Dimensions,
+    View 
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 
@@ -16,12 +17,14 @@ import { Feather } from '@expo/vector-icons'
 
 import wateringImg from '../assets/watering.png'
 import colors from '../styles/colors'
+import fonts from '../styles/fonts'
 
 export function Welcolme(){
     return(
         <SafeAreaView style={styles.container}>
+            <View style={styles.wrapper}>
             <Text style={styles.title}>
-                Gerencia {'\n'}
+                Gerencie {'\n'}
                 suas plantas de {'\n'}
                 forma fácil
             </Text>
@@ -37,14 +40,12 @@ export function Welcolme(){
             </Text>
 
             <TouchableOpacity style={styles.button} activeOpacity={0.6}>
-                <Text>
                     <Feather 
                         name="chevron-right" 
                         style={styles.buttonIcon}
                     />
-                </Text>
             </TouchableOpacity>
-
+            </View>
         </SafeAreaView>
     )
 }
@@ -53,23 +54,29 @@ export function Welcolme(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    wrapper: {
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-around',
+        paddingHorizontal: 20
     },
     title: {
-        fontSize: 32,
+        fontFamily: fonts.heading,
+        fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
         color: colors.heading,
         marginTop: 60,
-        lineHeight: 38
+        lineHeight: 36
     },
     subtitle: {
         textAlign: 'center',
         fontSize: 18,
         paddingHorizontal: 20,
         color: colors.body_dark,
-        lineHeight: 25
+        lineHeight: 25,
+        fontFamily: fonts.text
     },
     image: {
         height: Dimensions.get('window').width * 0.7,
@@ -79,7 +86,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 16,
-        marginBottom: 36,
+        marginBottom: 28,
         height: 56,
         width: 56
     },

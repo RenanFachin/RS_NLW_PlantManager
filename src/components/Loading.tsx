@@ -6,7 +6,10 @@ export function Loading() {
   return (
     <View style={styles.container}>
 
-    <ActivityIndicator  color={colors.green_dark} size="large"/>
+        <ActivityIndicator  
+            color={colors.green_dark} 
+            size="large"
+        />
 
     </View>
   );
