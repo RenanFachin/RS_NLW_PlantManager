@@ -13,12 +13,15 @@ import {
 
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
+import { useNavigation } from '@react-navigation/native'
 
 /*
  KeyboardAvoidingView é para ajudar a ter um melhor resultado com os inputs dentro da aplicação, mantendo o botão de confirmar aparecendo na tela mesmo quando o usuário está com o teclado do celular aberto
 */
 
 export function UserIdentification() {
+    const navigation = useNavigation()
+    
     /* 
     os dois primeiros states não precisaram ser tipados por que atribuindo o valor de FALSE, ele já vai automaticamente entender que é um dado booleano.
     Já o state name precisa receber uma tipagem do tipo string <string>
@@ -43,6 +46,11 @@ export function UserIdentification() {
         // Caso tenha conteúdo = true
         setIsFilled(Boolean(value))
         setName(value)
+    }
+
+
+    function handleStart(){
+        navigation.navigate('Confirmation')
     }
 
     return (
@@ -84,7 +92,10 @@ export function UserIdentification() {
                         />
 
                         <View style={styles.footer}>
-                            <Button title={'Confirmar'} />
+                            <Button 
+                                title={'Confirmar'} 
+                                onPress={handleStart}
+                            />
                         </View>
                     </View>
                 </View>

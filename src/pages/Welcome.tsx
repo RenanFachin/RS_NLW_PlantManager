@@ -9,6 +9,7 @@ import {
     View 
 } from 'react-native'
 import { Feather } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
 
 
 // TouchableOpacity é um elemento que faz um efeito de opacidade ao ser pressionado
@@ -20,6 +21,12 @@ import colors from '../styles/colors'
 import fonts from '../styles/fonts'
 
 export function Welcome(){
+
+    const navigation = useNavigation()
+    function handleStart(){
+        navigation.navigate('User')
+    }
+
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.wrapper}>
@@ -39,7 +46,7 @@ export function Welcome(){
                 Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você sempre que precisar.
             </Text>
 
-            <TouchableOpacity style={styles.button} activeOpacity={0.6}>
+            <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={handleStart}>
                     <Feather 
                         name="chevron-right" 
                         style={styles.buttonIcon}
