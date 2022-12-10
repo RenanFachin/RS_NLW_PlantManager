@@ -1,10 +1,10 @@
-import react from 'react'
 import {
-    SafeAreaView,
-    View,
-    Text,
     StyleSheet
 } from 'react-native'
+
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+import { Header } from '../components/Header'
 
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
@@ -12,9 +12,7 @@ import fonts from '../styles/fonts'
 export function PlantSelect(){
     return(
         <SafeAreaView style={styles.container}>
-            <Text>
-                Selecionar planta
-            </Text>
+            <Header />
         </SafeAreaView>
     )
 }
@@ -22,8 +20,6 @@ export function PlantSelect(){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: colors.background
     },
 })
