@@ -8,6 +8,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 import { Welcome } from '../pages/Welcome'
 import { UserIdentification } from "../pages/UserIdentification";
 import { Confirmation } from "../pages/Confirmation";
+import { PlantSelect } from "../pages/PlantSelect";
 
 
 const AppRoutes: React.FC = () => {
@@ -21,6 +22,8 @@ const AppRoutes: React.FC = () => {
                 <Screen name="User" component={UserIdentification}/>
 
                 <Screen name="Confirmation" component={Confirmation}/>
+
+                <Screen name="PlantSelect" component={PlantSelect}/>
 
             </Navigator>
     )
