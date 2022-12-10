@@ -1,8 +1,5 @@
-import {
-    StyleSheet,
-    View,
-    Text
-} from 'react-native'
+import { StyleSheet, View, Text, FlatList } from 'react-native'
+// FlatList é um elemento de renderização de listas na tela
 
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -25,7 +22,22 @@ export function PlantSelect(){
                 você deseja colocar sua planta?
             </Text>
 
-            <EnviromentButton title={'Sala'}/>
+            <View>
+                {/* O flatlist precisa das props data e renderItem */}
+                <FlatList data={[1,2,3,4,5]} renderItem={(item) => (
+                    <EnviromentButton 
+                        title={'Sala'}
+                        active
+                    />
+                )}
+                // Propriedade horizontal já muda a orientação da lista
+                horizontal
+                // Desabilitando a barra de scroll
+                showsHorizontalScrollIndicator={false}
+                // O flatList precisa desta propro contentContainerStyle para atribuir estilos
+                contentContainerStyle={styles.enviromentList}
+                />
+            </View>
         </SafeAreaView>
     )
 }
@@ -46,5 +58,11 @@ const styles = StyleSheet.create({
     subtitle: {
         fontFamily: fonts.complement,
         lineHeight: 23
+    },
+    enviromentList: {
+        height: 40,
+        justifyContent: 'center',
+        marginTop: 24,
+        marginBottom: 40
     }
 })
