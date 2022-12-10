@@ -1,3 +1,5 @@
+import api from '../services/api'
+import { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, FlatList } from 'react-native'
 // FlatList é um elemento de renderização de listas na tela
 
@@ -9,7 +11,34 @@ import { EnviromentButton } from '../components/EnviromentButton'
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
 
+// Tipando o que vem da API
+interface EnvironmentProps {
+    key: string;
+    title: string;
+}
+
 export function PlantSelect(){
+    // Definindo que o state terá o environmentProps como tipagem e será um vetor
+    const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
+
+    // UseEffect é um hook que é carregado sempre que algo é renderizado
+    useEffect(() => {
+        async function fetchEnvironment() {
+          const { data } = await api.get('plants_environments');  
+
+            // Adicionando um novo campo na lista
+          setEnvironments([
+            {
+                key: 'all',
+                title: 'Todos'
+            },
+            ...data
+          ])
+        }
+    
+        fetchEnvironment();
+      }, []);
+
     return(
         <SafeAreaView style={styles.container}>
             <Header />
@@ -24,10 +53,11 @@ export function PlantSelect(){
 
             <View>
                 {/* O flatlist precisa das props data e renderItem */}
-                <FlatList data={[1,2,3,4,5]} renderItem={(item) => (
+                <FlatList 
+                    data={environments} 
+                    renderItem={({item}) => (
                     <EnviromentButton 
-                        title={'Sala'}
-                        active
+                        title={item.title}
                     />
                 )}
                 // Propriedade horizontal já muda a orientação da lista

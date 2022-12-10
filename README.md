@@ -31,6 +31,8 @@ Este projeto foi desenvolvido utilizando:
   - [x] [@expo-google-fonts](https://github.com/expo/google-fonts)
   - [x] [ReactNavigation](https://reactnavigation.org/)
   - [x] [SafeAreaContext](https://docs.expo.dev/versions/latest/sdk/safe-area-context/)
+  - [x] [Axios](https://axios-http.com/ptbr/)
+  - [x] [json-server](https://github.com/typicode/json-server)
 
 ## ✔️ Autores
 
