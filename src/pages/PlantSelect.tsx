@@ -33,9 +33,28 @@ interface PlantProps {
 
 export function PlantSelect(){
     // Definindo que o state terá o environmentProps como tipagem e será um vetor
+    // Dados oriundos da API
     const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
-
     const [plants, setPlants] = useState<PlantProps[]>([])
+
+    // State auxiliar
+    const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([])
+
+    // State para gerenciar se o cartão está selecionado
+    const [environmentSelected, setEnvironmentSelected] = useState('all')
+
+    function handleEnvironmentSelected(environment: string){
+        setEnvironmentSelected(environment)
+
+        if(environment == 'all'){
+            return setFilteredPlants(plants)
+        }
+
+        const filtered = plants.filter(plant => 
+            plant.environments.includes(environment))
+
+        setFilteredPlants(filtered)
+    }
 
     // UseEffect é um hook que é carregado sempre que algo é renderizado
     useEffect(() => {
@@ -83,9 +102,11 @@ export function PlantSelect(){
                 <FlatList 
                     data={environments} 
                     renderItem={({item}) => (
-                    <EnviromentButton 
-                        title={item.title}
-                    />
+                        <EnviromentButton 
+                            title={item.title}
+                            active={item.key === environmentSelected}
+                            onPress={() => handleEnvironmentSelected(item.key)}
+                        />
                 )}
                 // Propriedade horizontal já muda a orientação da lista
                 horizontal
@@ -99,7 +120,7 @@ export function PlantSelect(){
 
             <View style={styles.plants}>
                 <FlatList 
-                    data={plants}
+                    data={filteredPlants}
                     renderItem={({item}) => (
                         <PlantCardPrimary 
                             data={item}

@@ -1,28 +1,29 @@
 import React from "react";
-import { StyleSheet, Text } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import colors from "../styles/colors";
 
 // Adicionando um botão customizado com o gesture handler já considerando o ambiente em que o usuário está utilizando
-import { RectButton, RectButtonProps } from 'react-native-gesture-handler'
+import { RectButton , RectButtonProps } from 'react-native-gesture-handler'
 import fonts from "../styles/fonts";
 
 // Fazendo o uso das props já definidas pela lib
-interface EnviromentButtonProps extends RectButtonProps{
-    title: String;
-    active?: Boolean;
+interface EnviromentButtonProps{
+    title: string;
+    active?: boolean;
+    onPress: () => void;
 }
 
 
 
 export function EnviromentButton({title, active=false, ...rest}: EnviromentButtonProps){
     return(
-        <RectButton 
-            {...rest} 
+        <TouchableOpacity 
             // Atribuindo vetor de estilos
             style={[
                 styles.listStyle, 
                 active && styles.listStyleActive
             ]}
+            {...rest} 
         >
 
             <Text 
@@ -34,7 +35,7 @@ export function EnviromentButton({title, active=false, ...rest}: EnviromentButto
                 {title}
             </Text>
 
-        </RectButton>
+        </TouchableOpacity>
     )
 }
 
