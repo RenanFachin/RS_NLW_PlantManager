@@ -36,6 +36,8 @@ Este projeto foi desenvolvido utilizando:
   - [x] [Axios](https://axios-http.com/ptbr/)
   - [x] [json-server](https://github.com/typicode/json-server)
   - [x] [react-native-svg](https://docs.expo.dev/versions/latest/sdk/svg/)
+  - [x] [Lottie](https://docs.expo.dev/versions/latest/sdk/lottie/)
+- Extras: lottiefiles para as animações de loading
 
 ## ✔️ Autores
 

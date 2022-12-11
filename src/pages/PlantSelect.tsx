@@ -5,12 +5,13 @@ import { StyleSheet, View, Text, FlatList } from 'react-native'
 
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import { Load } from '../components/Load'
 import { Header } from '../components/Header'
 import { EnviromentButton } from '../components/EnviromentButton'
+import { PlantCardPrimary } from '../components/PlantCard/PlantCardPrimary'
 
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
-import { PlantCardPrimary } from '../components/PlantCard/PlantCardPrimary'
 
 // Tipando o que vem da API
 interface EnvironmentProps {
@@ -39,15 +40,16 @@ export function PlantSelect(){
 
     // State auxiliar
     const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([])
-
     // State para gerenciar se o cartão está selecionado
     const [environmentSelected, setEnvironmentSelected] = useState('all')
 
+    const [loading, setLoading] = useState(true)
+
     function handleEnvironmentSelected(environment: string){
         setEnvironmentSelected(environment)
-
-        if(environment == 'all'){
-            return setFilteredPlants(plants)
+        
+        if (environment === 'all'){
+            return setFilteredPlants(plants);
         }
 
         const filtered = plants.filter(plant => 
@@ -80,11 +82,17 @@ export function PlantSelect(){
         async function fetchPlants(){
             const { data } = await api.get('plants?_sort=name&order=asc');
             setPlants(data)
+            setFilteredPlants(data)
+
+            // Após carregar as infos da api, cortar a animação alterando o seu state
+            setLoading(false)
         }
 
         fetchPlants()
     },[])
 
+    if(loading)
+        return <Load />
     return(
         <SafeAreaView style={styles.container}>
             <Header />

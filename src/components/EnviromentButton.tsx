@@ -2,8 +2,6 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import colors from "../styles/colors";
 
-// Adicionando um botão customizado com o gesture handler já considerando o ambiente em que o usuário está utilizando
-import { RectButton , RectButtonProps } from 'react-native-gesture-handler'
 import fonts from "../styles/fonts";
 
 // Fazendo o uso das props já definidas pela lib
