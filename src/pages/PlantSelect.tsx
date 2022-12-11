@@ -40,7 +40,7 @@ export function PlantSelect(){
     // UseEffect é um hook que é carregado sempre que algo é renderizado
     useEffect(() => {
         async function fetchEnvironment() {
-          const { data } = await api.get('plants_environments');  
+          const { data } = await api.get('plants_environments?_sort=title&order=asc');  
 
             // Adicionando um novo campo na lista
           setEnvironments([
@@ -59,7 +59,7 @@ export function PlantSelect(){
     // Buscando as plantas da API
     useEffect(() => {
         async function fetchPlants(){
-            const { data } = await api.get('plants');
+            const { data } = await api.get('plants?_sort=name&order=asc');
             setPlants(data)
         }
 

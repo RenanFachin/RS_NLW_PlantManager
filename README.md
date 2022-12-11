@@ -18,6 +18,8 @@ O Projeto está sendo desenvolvido no programa rocketseat PLUS e tem o seu foco 
 
 # Faça a instalação das depêndencias
   npm i
+# Configurar a API localmente
+  json-server ./src/services/server.json --host (seuIP) --port 3333
 # Executando o projeto no ambiente de desenvolvimento
   expo start
 ```
