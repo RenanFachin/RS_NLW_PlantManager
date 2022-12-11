@@ -43,8 +43,15 @@ export function PlantSelect(){
     // State para gerenciar se o cartão está selecionado
     const [environmentSelected, setEnvironmentSelected] = useState('all')
 
+    // State para mostrar a tela de load enquanto os dados não são retornados da API
     const [loading, setLoading] = useState(true)
 
+    // State para gerenciar a páginação
+    const [page, setPage] = useState(1)
+    const [loadMore, setLoadingMore] = useState(false)
+    const [loadedAll, setLoadedAll] = useState(false)
+
+    // Function para selecionar o ambiente
     function handleEnvironmentSelected(environment: string){
         setEnvironmentSelected(environment)
         
@@ -56,6 +63,38 @@ export function PlantSelect(){
             plant.environments.includes(environment))
 
         setFilteredPlants(filtered)
+    }
+
+    // Função para buscar os dados de plantas da API
+    async function fetchPlants(){
+        const { data } = await api.get(`plants?_sort=name&order=asc&_page=${page}&_limit=6`);
+
+        if(!data){
+            return setLoading(true)
+        }
+        
+        if(page > 1){
+            setPlants(oldValue => [...oldValue, ...data])
+            setFilteredPlants(oldValue => [...oldValue, ...data])
+        } else {
+            setPlants(data)
+            setFilteredPlants(data)
+        }
+
+        // Após carregar as infos da api, cortar a animação alterando o seu state
+        setLoading(false)
+        setLoadingMore(false)
+    }
+
+    // Qnd o usuário rolar a página e chegar ao final da rolagem, chamar mais dados
+    function handleFetchMore(distance: number){
+        if(distance < 1){
+            return
+        }
+
+        setLoadingMore(true)
+        setPage(oldValue => oldValue + 1)
+        fetchPlants()
     }
 
     // UseEffect é um hook que é carregado sempre que algo é renderizado
@@ -76,20 +115,14 @@ export function PlantSelect(){
         fetchEnvironment();
       }, []);
 
-
     // Buscando as plantas da API
     useEffect(() => {
-        async function fetchPlants(){
-            const { data } = await api.get('plants?_sort=name&order=asc');
-            setPlants(data)
-            setFilteredPlants(data)
 
-            // Após carregar as infos da api, cortar a animação alterando o seu state
-            setLoading(false)
-        }
 
         fetchPlants()
     },[])
+
+
 
     if(loading)
         return <Load />
@@ -138,6 +171,9 @@ export function PlantSelect(){
                 showsVerticalScrollIndicator={false}
                 // Renderizando duas colunas na lista
                 numColumns={2}
+                // Paginação
+                onEndReachedThreshold={0.3}
+                onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
                 />
             </View>
         </SafeAreaView>
