@@ -33,6 +33,7 @@ Este projeto foi desenvolvido utilizando:
   - [x] [SafeAreaContext](https://docs.expo.dev/versions/latest/sdk/safe-area-context/)
   - [x] [Axios](https://axios-http.com/ptbr/)
   - [x] [json-server](https://github.com/typicode/json-server)
+  - [x] [react-native-svg](https://docs.expo.dev/versions/latest/sdk/svg/)
 
 ## ✔️ Autores
 

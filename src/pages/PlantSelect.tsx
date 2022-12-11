@@ -19,15 +19,15 @@ interface EnvironmentProps {
 }
 
 interface PlantProps {
-    id: String;
-    name: String;
-    about: String;
-    water_tips: String;
-    photo: String;
-    environments: [String];
+    id: string;
+    name: string;
+    about: string;
+    water_tips: string;
+    photo: string;
+    environments: [string];
     frequency: {
-        times: Number;
-        repear_every: String;
+        times: number;
+        repear_every: string;
     }
 }
 
