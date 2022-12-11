@@ -10,6 +10,7 @@ import { EnviromentButton } from '../components/EnviromentButton'
 
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
+import { PlantCardPrimary } from '../components/PlantCard/PlantCardPrimary'
 
 // Tipando o que vem da API
 interface EnvironmentProps {
@@ -17,9 +18,24 @@ interface EnvironmentProps {
     title: string;
 }
 
+interface PlantProps {
+    id: String;
+    name: String;
+    about: String;
+    water_tips: String;
+    photo: String;
+    environments: [String];
+    frequency: {
+        times: Number;
+        repear_every: String;
+    }
+}
+
 export function PlantSelect(){
     // Definindo que o state terá o environmentProps como tipagem e será um vetor
     const [environments, setEnvironments] = useState<EnvironmentProps[]>([])
+
+    const [plants, setPlants] = useState<PlantProps[]>([])
 
     // UseEffect é um hook que é carregado sempre que algo é renderizado
     useEffect(() => {
@@ -38,6 +54,17 @@ export function PlantSelect(){
     
         fetchEnvironment();
       }, []);
+
+
+    // Buscando as plantas da API
+    useEffect(() => {
+        async function fetchPlants(){
+            const { data } = await api.get('plants');
+            setPlants(data)
+        }
+
+        fetchPlants()
+    },[])
 
     return(
         <SafeAreaView style={styles.container}>
@@ -68,6 +95,22 @@ export function PlantSelect(){
                 contentContainerStyle={styles.enviromentList}
                 />
             </View>
+
+
+            <View style={styles.plants}>
+                <FlatList 
+                    data={plants}
+                    renderItem={({item}) => (
+                        <PlantCardPrimary 
+                            data={item}
+                        />
+                    )}
+                // Desabilitando a rolagem vertical
+                showsVerticalScrollIndicator={false}
+                // Renderizando duas colunas na lista
+                numColumns={2}
+                />
+            </View>
         </SafeAreaView>
     )
 }
@@ -94,5 +137,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginTop: 24,
         marginBottom: 40
+    },
+    plants: {
+        flex: 1,
+        justifyContent: 'center'
     }
 })
