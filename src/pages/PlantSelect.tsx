@@ -141,7 +141,10 @@ export function PlantSelect(){
             <View>
                 {/* O flatlist precisa das props data e renderItem */}
                 <FlatList 
-                    data={environments} 
+                    data={environments}
+                    // O react pede, para fins de performance, que a flatlist tenha a chave de identificador único
+                    // Transformar a key em string é uma boa prática
+                    keyExtractor={(item) => String(item.key)}
                     renderItem={({item}) => (
                         <EnviromentButton 
                             title={item.title}
@@ -162,6 +165,7 @@ export function PlantSelect(){
             <View style={styles.plants}>
                 <FlatList 
                     data={filteredPlants}
+                    keyExtractor={(item) => String(item.id)}
                     renderItem={({item}) => (
                         <PlantCardPrimary 
                             data={item}
