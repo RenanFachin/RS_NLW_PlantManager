@@ -10,6 +10,7 @@ import { UserIdentification } from "../pages/UserIdentification";
 import { Confirmation } from "../pages/Confirmation";
 import { PlantSelect } from "../pages/PlantSelect";
 import { PlantSave } from "../pages/PlantSave";
+import { MyPlants } from "../pages/MyPlants";
 
 
 const AppRoutes: React.FC = () => {
@@ -27,6 +28,8 @@ const AppRoutes: React.FC = () => {
                 <Screen name="PlantSelect" component={PlantSelect}/>
 
                 <Screen name="PlantSave" component={PlantSave}/>
+
+                <Screen name="MyPlants" component={MyPlants}/>
 
             </Navigator>
     )
