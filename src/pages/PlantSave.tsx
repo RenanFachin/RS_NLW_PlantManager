@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Alert, TouchableOpacity, Platform } from 'react-native'
+import { PlantProps } from "../libs/storage";
 
 // Com o useRoute é possível recuperar parâmetros passados pela rota
 import { useRoute } from '@react-navigation/core'
@@ -14,18 +15,7 @@ import fonts from "../styles/fonts";
 
 
 interface Params {
-    plant: {
-        id: string;
-        name: string;
-        about: string;
-        water_tips: string;
-        photo: string;
-        environments: [string];
-        frequency: {
-            times: number;
-            repear_every: string;
-        }
-    }
+    plant: PlantProps
 }
 
 export function PlantSave(){

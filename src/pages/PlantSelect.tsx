@@ -14,24 +14,14 @@ import { PlantCardPrimary } from '../components/PlantCard/PlantCardPrimary'
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
 
+import { PlantProps } from "../libs/storage";
+
 // Tipando o que vem da API
 interface EnvironmentProps {
     key: string;
     title: string;
 }
 
-interface PlantProps {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: [string];
-    frequency: {
-        times: number;
-        repear_every: string;
-    }
-}
 
 export function PlantSelect(){
     // Definindo que o state terá o environmentProps como tipagem e será um vetor
