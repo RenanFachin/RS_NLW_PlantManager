@@ -33,6 +33,7 @@ Este projeto foi desenvolvido utilizando:
   - [x] [@expo/vector-icons](https://docs.expo.dev/guides/icons/#expovector-icons)
   - [x] [@expo-google-fonts](https://github.com/expo/google-fonts)
   - [x] [ReactNavigation](https://reactnavigation.org/)
+    - [x] [Tab navigation](https://reactnavigation.org/docs/tab-based-navigation)
   - [x] [SafeAreaContext](https://docs.expo.dev/versions/latest/sdk/safe-area-context/)
   - [x] [Axios](https://axios-http.com/ptbr/)
   - [x] [json-server](https://github.com/typicode/json-server)

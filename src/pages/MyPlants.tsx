@@ -67,7 +67,7 @@ export function MyPlants(){
                             data={item}
                         />
                     )}
-                    showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={true}
                     contentContainerStyle={{flex: 1}}
                 />
             </View>
