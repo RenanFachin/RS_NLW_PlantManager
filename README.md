@@ -44,6 +44,7 @@ Este projeto foi desenvolvido utilizando:
   - [x] [DateTimePicker](https://docs.expo.dev/versions/latest/sdk/date-time-picker/)
   - [x] [date-fns](https://date-fns.org/)
   - [x] [native-base](https://nativebase.io/)
+  - [x] [expo-notifications](https://docs.expo.dev/versions/latest/sdk/notifications/)
 - Extras: lottiefiles para as animações de loading
 
 ## ✔️ Autores
