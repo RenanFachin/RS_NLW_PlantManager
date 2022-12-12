@@ -10,7 +10,8 @@ import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
     Platform,
-    Keyboard
+    Keyboard,
+    Alert
 } from 'react-native'
 
 import colors from '../styles/colors'
@@ -56,6 +57,11 @@ export function UserIdentification() {
 
 
     function handleStart() {
+        // validação de dados
+        if(!name){
+            return Alert.alert('Me diga o seu nome :)')
+        }
+
         navigation.navigate('Confirmation')
     }
 

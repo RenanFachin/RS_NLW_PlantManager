@@ -1,6 +1,6 @@
 import api from '../services/api'
 import { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, FlatList } from 'react-native'
+import { StyleSheet, View, Text, FlatList, ActivityIndicator } from 'react-native'
 // FlatList é um elemento de renderização de listas na tela
 
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -174,6 +174,13 @@ export function PlantSelect(){
                 // Paginação
                 onEndReachedThreshold={0.3}
                 onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
+                // Renderizando um componente de loading do próprio reactNative
+                ListFooterComponent={
+                    loadMore ?
+                    <ActivityIndicator color={colors.green} />
+                    :
+                    <></>
+                }
                 />
             </View>
         </SafeAreaView>
