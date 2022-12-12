@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text, Image, FlatList, Alert } from 'react-native'
 import { Header } from "../components/Header";
 
-import { PlantProps, loadPlantFromStorage, StoragePlantProps } from "../libs/storage";
+import { PlantProps, loadPlantFromStorage, removePlant } from "../libs/storage";
 import { formatDistance } from "date-fns";
 import { pt } from "date-fns/locale";
 
@@ -11,15 +11,15 @@ import WaterDrop from '../assets/waterdrop.png'
 import fonts from "../styles/fonts";
 import { PlantCardSecondary } from "../components/PlantCard/PlantCardSecondary";
 import { Load } from "../components/Load";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 
 export function MyPlants(){
     const [myPlants, setMyPlants] = useState<PlantProps[]>([])
     const [loading, setLoading] = useState(true)
     const [nextWatered, setNextWatered] = useState<string>()
 
+
     function handleRemove(plant: PlantProps){
+    
         Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
             {
                 text: 'Não',
@@ -29,15 +29,7 @@ export function MyPlants(){
                 text: 'Sim',
                 onPress: async () => {
                     try {
-                        const data = await AsyncStorage.getItem('@plantmanager:plants')
-                        const plants = data ? (JSON.parse(data) as StoragePlantProps) : {}
-
-                        delete plants[plant.id]
-
-                        await AsyncStorage.setItem(
-                            '@plantmanager:plants',
-                            JSON.stringify(plants)
-                        )
+                        await removePlant(plant.id)
 
                         setMyPlants((oldData) => (
                             oldData.filter((item) => item.id !== plant.id)

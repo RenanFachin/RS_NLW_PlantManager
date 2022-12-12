@@ -1,18 +1,17 @@
 import React from "react";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View, Animated } from 'react-native'
-import { RectButton, RectButtonProps, GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler'
-import Swipeable from 'react-native-gesture-handler/Swipeable'
+import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
+
 
 
 
 // Lidando com SVGS
 import { SvgFromUri } from 'react-native-svg'
-import { Feather } from "@expo/vector-icons";
 
 
-interface PlantProps extends TouchableOpacity  {
+
+interface PlantProps extends TouchableOpacityProps  {
     data: {
         name: string;
         photo: string;
