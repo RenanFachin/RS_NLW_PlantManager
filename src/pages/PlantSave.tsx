@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Alert, TouchableOpacity, Platform } from 'react-native'
-import { loadPlantFromStorage, PlantProps, savePlantAtStorage } from "../libs/storage";
+import { PlantProps, savePlantAtStorage } from "../libs/storage";
 
 // Com o useRoute é possível recuperar parâmetros passados pela rota
 import { useNavigation, useRoute } from '@react-navigation/core'
