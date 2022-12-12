@@ -11,6 +11,7 @@
 # NLW#05 - PlantManager
 Um aplicativo de fácil uso e muito intuitivo para ajudar as pessoas a gerenciar o cuidado com suas plantas!<br>
 O Projeto está sendo desenvolvido no programa rocketseat PLUS e tem o seu foco em uma aplicação `Mobile` utilizando Typescript e ReactNative. <br>
+O projeto irá contar com uma API fictícia montada localmente para testes (utilizando o json-server) e também vai armazenar os dados na storageAPI do asyncStorage.
 
 ## Instalação
 ```bash
@@ -37,6 +38,7 @@ Este projeto foi desenvolvido utilizando:
   - [x] [json-server](https://github.com/typicode/json-server)
   - [x] [react-native-svg](https://docs.expo.dev/versions/latest/sdk/svg/)
   - [x] [Lottie](https://docs.expo.dev/versions/latest/sdk/lottie/)
+  - [x] [AsyncStorage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
 - Extras: lottiefiles para as animações de loading
 
 ## ✔️ Autores

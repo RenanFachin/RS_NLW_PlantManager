@@ -17,6 +17,7 @@ import {
 import colors from '../styles/colors'
 import fonts from '../styles/fonts'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 /*
  KeyboardAvoidingView é para ajudar a ter um melhor resultado com os inputs dentro da aplicação, mantendo o botão de confirmar aparecendo na tela mesmo quando o usuário está com o teclado do celular aberto
@@ -36,7 +37,7 @@ export function UserIdentification() {
 
     const [isFocused, setIsFocused] = useState(false); // Capturando se o input está focado
     const [isFilled, setIsFilled] = useState(false); // Capturando se o input está preenchido
-    const [name, setName] = useState<String>() // Capturando o nome do usuário em um state
+    const [name, setName] = useState<string>() // Capturando o nome do usuário em um state
 
     function handleInputBlur() {
         setIsFocused(false)
@@ -56,11 +57,15 @@ export function UserIdentification() {
     }
 
 
-    function handleStart() {
+    // Para utilizar a API do async storage é necessário ser uma função assíncrona
+    async function handleStart() {
         // validação de dados
         if(!name){
             return Alert.alert('Me diga o seu nome :)')
         }
+
+        // Armazenando o dado na API do asyncStorage. (KEY-VALUE)
+        await AsyncStorage.setItem('@plantmanager:user', name)
 
         navigation.navigate('Confirmation')
     }
