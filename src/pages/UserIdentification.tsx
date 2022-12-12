@@ -65,9 +65,12 @@ export function UserIdentification() {
         }
 
         // Armazenando o dado na API do asyncStorage. (KEY-VALUE)
-        await AsyncStorage.setItem('@plantmanager:user', name)
-
-        navigation.navigate('Confirmation')
+        try {
+            await AsyncStorage.setItem('@plantmanager:user', name)
+            navigation.navigate('Confirmation')
+        } catch{
+            return Alert.alert('Não foi possível salvar o seu nome')
+        }
     }
 
     return (

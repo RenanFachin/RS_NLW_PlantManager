@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Alert, TouchableOpacity, Platform } from 'react-native'
-import { PlantProps } from "../libs/storage";
+import { loadPlantFromStorage, PlantProps, savePlantAtStorage } from "../libs/storage";
 
 // Com o useRoute é possível recuperar parâmetros passados pela rota
 import { useRoute } from '@react-navigation/core'
@@ -25,7 +25,7 @@ export function PlantSave(){
     const [selectedDateTime, setSelectedDateTime] = useState(new Date())
     const [showDatePicker, setShowDatePicker] = useState(Platform.OS === "ios");
 
-    function handleChangeTime(event: Event, dateTime: Date | undefined) {
+    function handleChangeTime(event: Event, dateTime: Date | undefined){
         if (Platform.OS === "android") {
           setShowDatePicker((oldState) => !oldState);
         }
@@ -40,6 +40,21 @@ export function PlantSave(){
 
     function handleOpenDateTimePickerForAndroidDevices(){
         setShowDatePicker((oldState) => !oldState);
+    }
+
+    async function handleSavePlant(){
+        const data = await loadPlantFromStorage()
+
+        try{
+            await savePlantAtStorage ({
+                ...plant,
+                dateTimeNotification: selectedDateTime
+            })
+
+
+        } catch {
+            Alert.alert('Não foi possível salvar sua planta. :(')
+        }
     }
 
     return(
@@ -100,7 +115,7 @@ export function PlantSave(){
 
                 <Button 
                     title={"Cadastrar planta"}
-                    onPress={() => {}}
+                    onPress={handleSavePlant}
                 />
             </View>
         </View>
@@ -117,7 +132,6 @@ const styles = StyleSheet.create({
     plantInfo: {
         flex: 1,
         paddingHorizontal: 32,
-        paddingVertical: 40,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: colors.shape
@@ -135,11 +149,11 @@ const styles = StyleSheet.create({
         colors: colors.body_dark,
         textAlign: 'center',
         marginTop: 16,
+        marginBottom: 32
     },
     controller: {
         backgroundColor: colors.white,
-        paddingHorizontal: 32,
-        paddingVertical: 40,
+        paddingHorizontal: 32
     },
     tipContainer:{
         flexDirection: 'row',
@@ -150,7 +164,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         // Subindo o tipcontainer para ficar meio a meio com o background
         position: 'relative',
-        bottom: 85
+        bottom: 40
     },
     tipImage: {
         width: 56,
