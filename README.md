@@ -39,6 +39,8 @@ Este projeto foi desenvolvido utilizando:
   - [x] [react-native-svg](https://docs.expo.dev/versions/latest/sdk/svg/)
   - [x] [Lottie](https://docs.expo.dev/versions/latest/sdk/lottie/)
   - [x] [AsyncStorage](https://docs.expo.dev/versions/latest/sdk/async-storage/)
+  - [x] [DateTimePicker](https://docs.expo.dev/versions/latest/sdk/date-time-picker/)
+  - [x] [date-fns](https://date-fns.org/)
 - Extras: lottiefiles para as animações de loading
 
 ## ✔️ Autores

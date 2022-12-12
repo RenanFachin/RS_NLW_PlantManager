@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Alert, TouchableOpacity, Platform } from 'react-native'
 
 // Com o useRoute é possível recuperar parâmetros passados pela rota
 import { useRoute } from '@react-navigation/core'
+import DateTimePicker , { Event } from '@react-native-community/datetimepicker'
+import { format, isBefore } from "date-fns";
 
 import WaterDrop from '../assets/waterdrop.png'
 import { SvgFromUri } from 'react-native-svg'
@@ -28,20 +30,39 @@ interface Params {
 
 export function PlantSave(){
     const route = useRoute()
-    const {plant} = route.params as Params 
+    const { plant } = route.params as Params 
 
+    const [selectedDateTime, setSelectedDateTime] = useState(new Date())
+    const [showDatePicker, setShowDatePicker] = useState(Platform.OS === "ios");
+
+    function handleChangeTime(event: Event, dateTime: Date | undefined) {
+        if (Platform.OS === "android") {
+          setShowDatePicker((oldState) => !oldState);
+        }
+    
+        if (dateTime && isBefore(dateTime, new Date())) {
+          setSelectedDateTime(new Date());
+          return Alert.alert("Escolha uma hora no futuro! ⏰");
+        }
+    
+        if (dateTime) setSelectedDateTime(dateTime);
+      }
+
+    function handleOpenDateTimePickerForAndroidDevices(){
+        setShowDatePicker((oldState) => !oldState);
+    }
 
     return(
         <View style={styles.container}>
             <View style={styles.plantInfo}>
-                <SvgFromUri uri="" height={150} width={150}/>
+                <SvgFromUri uri={plant.photo} height={150} width={150}/>
 
                 <Text style={styles.plantName}>
-                    Nome da planta
+                    {plant.name}
                 </Text>
 
                 <Text style={styles.plantAbout}>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas, sapiente porro possimus distinctio rem.
+                    {plant.about}
                 </Text>
             </View>
 
@@ -53,13 +74,39 @@ export function PlantSave(){
                     />
 
                     <Text style={styles.tipText}>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                        {plant.water_tips} 
                     </Text>
                 </View>
 
                 <Text style={styles.alertLabel}>
                     Escolha o melhor horário para ser lembrado:
                 </Text>
+
+                {
+                    showDatePicker && 
+                    (
+                    <DateTimePicker 
+                        value={selectedDateTime}
+                        mode="time"
+                        negativeButtonLabel="Cancelar"
+                        positiveButtonLabel="Confirmar horário"
+                        onChange={handleChangeTime}
+                    />
+                    )
+                }
+
+                {
+                    Platform.OS === 'android' && (
+                        <TouchableOpacity
+                            style={styles.dateTimePickerButton} 
+                            onPress={handleOpenDateTimePickerForAndroidDevices}
+                        >
+                            <Text style={styles.dateTimePickerText}>
+                                {`Mudar ${format(selectedDateTime, 'HH:mm')}`}
+                            </Text>
+                        </TouchableOpacity>
+                    )
+                }
 
                 <Button 
                     title={"Cadastrar planta"}
@@ -136,5 +183,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 24,
         marginBottom: 40
-    }
+    },
+    dateTimePickerButton: {
+        width: '100%',
+        alignItems: 'center',
+        paddingVertical: 40
+    },
+    dateTimePickerText: {
+        color: colors.heading,
+        fontSize: 24,
+        fontFamily: fonts.text
+    },
 })
