@@ -12,11 +12,12 @@ export interface PlantProps {
             times: number;
             repear_every: string;
         },
+        hour: string;
         dateTimeNotification: Date;
 }
 
 // Interface para salvar a planta no storage
-interface StoragePlantProps{
+export interface StoragePlantProps{
     [id: string]: {
         // Objeto com todas as props correspondentes ao ID
         data: PlantProps

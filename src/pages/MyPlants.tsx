@@ -10,6 +10,7 @@ import colors from "../styles/colors";
 import WaterDrop from '../assets/waterdrop.png'
 import fonts from "../styles/fonts";
 import { PlantCardSecondary } from "../components/PlantCard/PlantCardSecondary";
+import { Load } from "../components/Load";
 
 
 export function MyPlants(){
@@ -37,7 +38,8 @@ export function MyPlants(){
         loadStoragePlants()
     },[])
 
-
+    if(loading)
+        return <Load />
     return(
         <View style={styles.container}>
             <Header />
@@ -67,8 +69,10 @@ export function MyPlants(){
                             data={item}
                         />
                     )}
-                    showsVerticalScrollIndicator={true}
-                    contentContainerStyle={{flex: 1}}
+                    showsVerticalScrollIndicator={false}
+                    // Flex 1 não estava funcionando para dar scroll. FlexGrow foi a solução encontrada
+                    // https://stackoverflow.com/questions/38137388/scroll-view-inside-view-not-working-react-native
+                    contentContainerStyle={{ flexGrow: 1}}
                 />
             </View>
         </View>

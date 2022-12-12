@@ -123,6 +123,7 @@ export function PlantSelect(){
 
     if(loading)
         return <Load />
+        
     return(
         <SafeAreaView style={styles.container}>
             <Header />
