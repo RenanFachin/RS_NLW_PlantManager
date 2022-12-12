@@ -1,14 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 import colors from "../styles/colors";
 
 import fonts from "../styles/fonts";
 
 // Fazendo o uso das props já definidas pela lib
-interface EnviromentButtonProps{
+interface EnviromentButtonProps extends TouchableOpacityProps{
     title: string;
     active?: boolean;
-    onPress: () => void;
+    // onPress: () => void;
 }
 
 

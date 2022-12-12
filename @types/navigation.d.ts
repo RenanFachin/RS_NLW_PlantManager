@@ -7,6 +7,7 @@ export declare global {
             User: undefined;
             Confirmation: undefined;
             PlantSelect: undefined;
+            PlantSave: undefined;
         }
     }
 }

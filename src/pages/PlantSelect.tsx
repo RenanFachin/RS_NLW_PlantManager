@@ -4,7 +4,8 @@ import { StyleSheet, View, Text, FlatList, ActivityIndicator } from 'react-nativ
 // FlatList é um elemento de renderização de listas na tela
 
 import { SafeAreaView } from 'react-native-safe-area-context'
-
+import { useNavigation } from '@react-navigation/native'
+ 
 import { Load } from '../components/Load'
 import { Header } from '../components/Header'
 import { EnviromentButton } from '../components/EnviromentButton'
@@ -49,7 +50,6 @@ export function PlantSelect(){
     // State para gerenciar a páginação
     const [page, setPage] = useState(1)
     const [loadMore, setLoadingMore] = useState(false)
-    const [loadedAll, setLoadedAll] = useState(false)
 
     // Function para selecionar o ambiente
     function handleEnvironmentSelected(environment: string){
@@ -95,6 +95,12 @@ export function PlantSelect(){
         setLoadingMore(true)
         setPage(oldValue => oldValue + 1)
         fetchPlants()
+    }
+
+    const navigation = useNavigation()
+
+    function handlePlantSelect(plant: PlantProps){
+        navigation.navigate('PlantSave')
     }
 
     // UseEffect é um hook que é carregado sempre que algo é renderizado
@@ -169,6 +175,7 @@ export function PlantSelect(){
                     renderItem={({item}) => (
                         <PlantCardPrimary 
                             data={item}
+                            onPress={() => handlePlantSelect(item)}
                         />
                     )}
                 // Desabilitando a rolagem vertical
