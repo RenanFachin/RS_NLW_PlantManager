@@ -7,7 +7,7 @@ export declare global {
             User: undefined;
             Confirmation: undefined;
             PlantSelect: undefined;
-            PlantSave: undefined;
+            PlantSave: PlantProps; // aqui é para dizer o que vai ser passado parâmetro na rota
         }
     }
 }

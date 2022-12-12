@@ -100,7 +100,8 @@ export function PlantSelect(){
     const navigation = useNavigation()
 
     function handlePlantSelect(plant: PlantProps){
-        navigation.navigate('PlantSave')
+        navigation.navigate('PlantSave', {plant})
+        // Foi necessário alterar o @types/navigation.d.ts para adicionar que seria passado algo pela rota
     }
 
     // UseEffect é um hook que é carregado sempre que algo é renderizado
