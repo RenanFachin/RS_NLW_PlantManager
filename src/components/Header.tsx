@@ -1,17 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, Image, View } from 'react-native'
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
 // Import da imagem
 import userImg from '../assets/ImagemPerfil.png'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export function Header(){
+    // Armazenando o nome do usuário cadastrado na screen de identification
+    const [userName, setUserName] = useState<string>()
+    
+    useEffect(() => {
+        async function loadStorageUserName(){
+            const user = await AsyncStorage.getItem('@plantmanager:user')
+
+            // Armazenando no state
+            // o método getItem espera duas condições para o que estiver lá, string ou null, então é necessário fazer (user || ``)
+            setUserName(user || ``)
+        }
+
+
+        loadStorageUserName()
+    },[])
+
     return(
         <View style={styles.container}>
             <View>
                 <Text style={styles.greeting}>Olá,</Text>
-                <Text style={styles.userName}>Renan</Text>
+                <Text style={styles.userName}>
+                    {userName}
+                </Text>
             </View>
 
             <Image source={userImg} style={styles.userImage}/>
