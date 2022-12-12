@@ -1,4 +1,5 @@
 import React from 'react'
+import { NativeBaseProvider } from "native-base";
 import { Loading } from './src/components/Loading'
 import { Routes } from './src/routes'
 
@@ -22,9 +23,9 @@ export default function App(){
   })
   
   return(
-    <>
+    <NativeBaseProvider>
       { fontsLoaded ? <Routes /> : <Loading />}
-    </>
+    </NativeBaseProvider>
   )
 }
 

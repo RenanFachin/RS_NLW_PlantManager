@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button } from '../components/Button'
+import { useToast } from 'native-base'
 
 import {
     SafeAreaView,
@@ -56,12 +57,18 @@ export function UserIdentification() {
         setName(value)
     }
 
+    const toast = useToast()
 
     // Para utilizar a API do async storage é necessário ser uma função assíncrona
     async function handleStart() {
         // validação de dados
         if(!name){
-            return Alert.alert('Me diga o seu nome :)')
+            return toast.show({
+                title: 'Me diga o seu nome para podermos iniciar',
+                placement: 'top',
+                bgColor: 'red.500',
+                duration: 1000
+            })
         }
 
         // Armazenando o dado na API do asyncStorage. (KEY-VALUE)

@@ -1,31 +1,42 @@
 import React from "react";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
-import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View, Animated } from 'react-native'
+import { RectButton, RectButtonProps, GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+
+
 
 // Lidando com SVGS
 import { SvgFromUri } from 'react-native-svg'
+import { Feather } from "@expo/vector-icons";
 
 
-interface PlantProps extends TouchableOpacityProps{
+interface PlantProps extends TouchableOpacity  {
     data: {
         name: string;
         photo: string;
         hour: string;
-    }
+    };
+    // Tipando também o recebimento de uma função
+    handleRemove: () => void
 }
 
-export function PlantCardSecondary({ data, ...rest }:PlantProps){
-    return(
-            <TouchableOpacity {...rest} style={styles.container} >
-                <SvgFromUri 
-                    uri={data.photo} 
-                    width={60} 
-                    height={60} 
+export function PlantCardSecondary({ data, handleRemove, ...rest }: PlantProps) {
+    return (
+            <TouchableOpacity 
+            {...rest} 
+            style={styles.container}                             
+            onPress={handleRemove}
+            >
+                <SvgFromUri
+                    uri={data.photo}
+                    width={60}
+                    height={60}
                 />
 
                 <Text style={styles.title}>
-                    { data.name }
+                    {data.name}
                 </Text>
 
                 <View style={styles.plantDetails}>
@@ -37,7 +48,7 @@ export function PlantCardSecondary({ data, ...rest }:PlantProps){
                         {data.hour}
                     </Text>
                 </View>
-            </TouchableOpacity>
+            </TouchableOpacity >
     )
 }
 
@@ -71,5 +82,17 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontFamily: fonts.heading,
         color: colors.body_dark
+    },
+    buttonRemove: {
+        width: 100,
+        height: 85,
+        backgroundColor: colors.red,
+        marginTop: 15,
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        right: 10,
+        paddingLeft: 16
     }
 })

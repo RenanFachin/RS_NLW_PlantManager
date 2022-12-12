@@ -12,6 +12,7 @@ import { SvgFromUri } from 'react-native-svg'
 import WaterDrop from '../assets/waterdrop.png'
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
+import { useToast } from "native-base";
 
 
 interface Params {
@@ -43,11 +44,19 @@ export function PlantSave(){
         setShowDatePicker((oldState) => !oldState);
     }
 
+    const toast = useToast()
     async function handleSavePlant(){
         try{
             await savePlantAtStorage ({
                 ...plant,
                 dateTimeNotification: selectedDateTime
+            })
+
+            toast.show({
+                title: 'Planta cadastrada com sucesso!',
+                placement: 'top',
+                bgColor: 'green.700',
+                duration: 2000
             })
 
             navigation.navigate('Confirmation', {
@@ -56,11 +65,17 @@ export function PlantSave(){
                 buttonTitle: 'Valeu',
                 icon: 'fingers',
                 nextScreen: 'MyPlants'
-            })
+            }
+            )
 
 
         } catch {
-            Alert.alert('Não foi possível salvar sua planta. :(')
+            toast.show({
+                title: 'Ooops... Não foi possível cadastrar sua planta',
+                placement: 'top',
+                bgColor: 'red.500',
+                duration: 2000
+            })
         }
     }
 
